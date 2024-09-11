@@ -8,8 +8,6 @@ import (
 	"strconv"
 )
 
-
-
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	for {
@@ -17,11 +15,14 @@ func main() {
 		text, _ := reader.ReadString('\n')
 		input := text[:len(text)-1] + strings.Repeat(" ", 30)
 		result := ""
+		// Будем работать с числами в юникоде
+		// Проверка на первую кавычку
 		if input[0] != 34 {
 			panic("Первый аргумент должен быть строкой и выделяться \"")
 		} else {
 			firstFlag := false
 			idx := 0
+			// Проверка, что слово заканчивается на кавычку и после кавычки есть пробел, а так же длина строки до 10 символов
 			for i := 1; i < 12; i++ {
 				if (input[i] == 34) && (input[i+1] == 32) {
 					firstFlag = true
@@ -34,6 +35,7 @@ func main() {
 			}
 			firstWord := input[1:idx]
 			operator := input[idx+2]
+			// Проверяем, что введем корректный мат. оператор и отделен пробелами
 			if (input[idx+1] == 32) && (input[idx+3] == 32) {
 				// Если ввели + или -
 				idxNew := idx+4
